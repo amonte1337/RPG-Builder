@@ -127,7 +127,6 @@ void Character::levelUp()
 
 		while (this->exp >= this->expNext && this->level < 100)
 		{
-			this->exp -= this->expNext;
 			this->level++;
 			this->expNext = static_cast<int>(pow(level, 3) + 5);
 
@@ -149,32 +148,55 @@ void Character::levelUp()
 		//these only print out if the variable actually increased at all
 		if (prevHp != this->hpMax)
 		{
+			if (this->hpMax - prevHp > 5)
+			{
+				std::cout << "Healthy AF! ";
+			}
 			std::cout << "HP went up by " << this->hpMax - prevHp << ".\n";
 		}
 
 		if (prevPp != this->ppMax)
 		{
-
+			if (this->ppMax - prevPp > 5)
+			{
+				std::cout << "Mad skillz! ";
+			}
 			std::cout << "PP went up by " << this->ppMax - prevPp << ".\n";
 		}
 
 		if (prevOff != this->offense)
 		{
+			if (this->offense - prevOff > 3)
+			{
+				std::cout << "Yo, stronk! ";
+			}
 			std::cout << "Offense went up by " << this->offense - prevOff << ".\n";
 		}
 		
 		if (prevDef != this->defense)
 		{
+			if (this->defense - prevDef > 3)
+			{
+				std::cout << "That's tuff! ";
+			}
 			std::cout << "Defense went up by " << this->defense - prevDef << ".\n";
 		}
 		
 		if (prevIq != this->iq)
 		{
+			if (this->iq - prevIq > 3)
+			{
+				std::cout << "Wow, smort! ";
+			}
 			std::cout << "IQ went up by " << this->iq - prevIq << ".\n";
 		}
 		
 		if (prevSpeed != this->speed)
 		{
+			if (this->speed - prevSpeed > 3)
+			{
+				std::cout << "Gotta go fast! ";
+			}
 			std::cout << "Speed went up by " << this->speed - prevSpeed << ".\n";
 		}
 
