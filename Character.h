@@ -10,7 +10,7 @@ public:
 	Character(std::string name, int currency, int level,
 		int exp, int expNext, int vitality, int psyche, int strength, int dexterity,
 		int hp, int pp, int offense, int defense,
-		int iq, int speed, int statPoints, int skillPoints);
+		int iq, int speed);
 	virtual ~Character(); //virtual deconstructor
 
 	//Functions
@@ -21,12 +21,11 @@ public:
 	std::string getAsString() const;
 
 	//Accessors
-	inline const int& getDistTravel() const { return this->distanceTravelled; }
+	//inline const int& getDistTravel() const { return this->distanceTravelled; }
 	inline const std::string& getName() const { return this->name; }
 	inline const int& getLevel() const { return this->level; }
 	inline const int& getExp() const { return this->exp; }
 	inline const int& getExpNext() const { return this->expNext; }
-	inline const int& getStatPoints() const { return this->statPoints; }
 	inline const int& getHpMax() const { return this->hpMax; }
 	inline const int& getHp() const { return this->hp; }
 	inline const int& getPpMax() const { return this->ppMax; }
@@ -37,9 +36,10 @@ public:
 	inline const int& getSpeed() const { return this->speed; }
 
 	//Modifiers
-	inline void setDistTravel(const int& distance) { this->distanceTravelled += distance; }
+	//inline void setDistTravel(const int& distance) { this->distanceTravelled += distance; }
 	inline void travel() { this->distanceTravelled++; }
 	inline void gainExp(const int& exp) { this->exp += exp; levelUp(); }
+	inline void gainCurrency(const int& currency) { this->currency += currency; }
 
 private:
 	int distanceTravelled;
@@ -67,8 +67,4 @@ private:
 	int defense;
 	int iq;
 	int speed;
-
-	int statPoints;
-	int skillPoints;
 };
-
