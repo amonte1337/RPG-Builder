@@ -3,7 +3,7 @@
 Character::Character()
 {
 	//positioning
-	this->distanceTravelled = 0;
+	//this->distanceTravelled = 0;
 
 	//surface level stuff
 	this->currency = 0;
@@ -16,7 +16,7 @@ Character::Character()
 	this->vitality = 0;
 	this->psyche = 0;
 	this->strength = 0;
-	//this->dexterity = 0;
+	this->dexterity = 0;
 
 	//the meat and bones of a character!
 	this->hpMax = 0;
@@ -26,17 +26,13 @@ Character::Character()
 	this->offense = 0;
 	this->defense = 0;
 	this->iq = 0;
-	//this->speed = 0;
-
-	//i still dont know what these do
-	this->statPoints = 0;
-	this->skillPoints = 0;
+	this->speed = 0;
 }
 
 Character::Character(std::string name, int currency, int level, 
 	int exp, int expNext,int vitality, int psyche, int strength, int dexterity, 
 	int hp, int pp, int offense,int defense, 
-	int iq, int speed, int statPoints, int skillPoints)
+	int iq, int speed)
 {
 	//positioning?
 	//this->distanceTravelled = distanceTravelled;
@@ -52,7 +48,7 @@ Character::Character(std::string name, int currency, int level,
 	this->vitality = vitality;
 	this->psyche = psyche;
 	this->strength = strength;
-	//this->dexterity = dexterity;
+	this->dexterity = dexterity;
 
 	//the meat and bones of a character!
 	this->hp = hp;
@@ -60,11 +56,7 @@ Character::Character(std::string name, int currency, int level,
 	this->offense = offense;
 	this->defense = defense;
 	this->iq = iq;
-	//this->speed = speed;
-
-	//i still dont know what these do
-	this->statPoints = statPoints;
-	this->skillPoints = skillPoints;
+	this->speed = speed;
 
 	this->updateStats();
 }
@@ -77,7 +69,7 @@ Character::~Character()
 //Functions
 void Character::initialize(const std::string name)
 {
-	this->distanceTravelled = 0;
+	//this->distanceTravelled = 0;
 
 	this->currency = 100;
 	this->name = name;
@@ -88,7 +80,7 @@ void Character::initialize(const std::string name)
 	this->vitality = 5;
 	this->psyche = 3;
 	this->strength = 3;
-	//this->dexterity = 2; 
+	this->dexterity = 2; 
 
 	this->hpMax = (this->vitality * 2) + 30;
 	this->hp = hpMax;
@@ -97,10 +89,7 @@ void Character::initialize(const std::string name)
 	this->offense = (this->strength * 2) + 5;
 	this->defense = (this->strength * 2);
 	this->iq = (this->psyche * 1.5) + 5;
-	//this->speed = (this->dexterity * 1.5) + 2;
-
-	this->statPoints = 0;
-	this->skillPoints = 0;
+	this->speed = (this->dexterity * 1.5) + 2;
 }
 
 void Character::printStats() const
@@ -119,7 +108,7 @@ void Character::printStats() const
 	std::cout << "= Offense: " << this->offense << '\n';
 	std::cout << "= Defense: " << this->defense << '\n';
 	std::cout << "= IQ: " << this->iq << '\n';
-	//std::cout << "= Speed: " << this->speed << '\n';
+	std::cout << "= Speed: " << this->speed << '\n';
 	std::cout << '\n';
 	std::cout << "Press anything to continue...";
 	system("pause>0");
@@ -134,40 +123,69 @@ void Character::levelUp()
 		int prevOff = this->offense;
 		int prevDef = this->defense;
 		int prevIq = this->iq;
+		int prevSpeed = this->speed;
 
 		while (this->exp >= this->expNext && this->level < 100)
 		{
-			//this->exp -= this->expNext;
+			this->exp -= this->expNext;
 			this->level++;
 			this->expNext = static_cast<int>(pow(level, 3) + 5);
 
-			this->statPoints++;
-			this->skillPoints++;
+			//increment stats
+			this->vitality += rand() % 5;
+			this->psyche += rand() % 5;
+			this->strength += rand() % 5;
+			this->dexterity += rand() % 5;
 
-			this->vitality += rand() % 3;
-			this->psyche += rand() % 3;
-			this->strength += rand() % 3;
+			//update stats
 			this->updateStats();
 		}
 
-
+		//print if character level up
+		system("CLS");
 		std::cout << this->getName() << " is now level "
 			<< this->getLevel() << "!" << "\n\n";
 
-		std::cout << "HP went up by " << this->hpMax - prevHp << "!\n";
-		std::cout << "PP went up by " << this->ppMax - prevPp << "!\n";
-		std::cout << "Offense went up by " << this->offense - prevOff << "!\n";
-		std::cout << "Defense went up by " << this->defense - prevDef << "!\n";
-		std::cout << "IQ went up by " << this->iq - prevIq << "!\n";
+		//these only print out if the variable actually increased at all
+		if (prevHp != this->hpMax)
+		{
+			std::cout << "HP went up by " << this->hpMax - prevHp << ".\n";
+		}
+
+		if (prevPp != this->ppMax)
+		{
+
+			std::cout << "PP went up by " << this->ppMax - prevPp << ".\n";
+		}
+
+		if (prevOff != this->offense)
+		{
+			std::cout << "Offense went up by " << this->offense - prevOff << ".\n";
+		}
+		
+		if (prevDef != this->defense)
+		{
+			std::cout << "Defense went up by " << this->defense - prevDef << ".\n";
+		}
+		
+		if (prevIq != this->iq)
+		{
+			std::cout << "IQ went up by " << this->iq - prevIq << ".\n";
+		}
+		
+		if (prevSpeed != this->speed)
+		{
+			std::cout << "Speed went up by " << this->speed - prevSpeed << ".\n";
+		}
 
 		std::cout << "\nPress anything to continue...";
 		system("pause>0");
-		//std::cout << "Check the character sheet for any stat gains!\n";
 	}
 }
 
 void Character::updateStats()
 {
+	//this is to update stats after a level up
 	this->expNext = static_cast<int>(pow(level, 3) + 5);
 
 	this->hpMax = (this->vitality * 2) + 30;
@@ -177,7 +195,7 @@ void Character::updateStats()
 	this->offense = (this->strength * 2) + 5;
 	this->defense = (this->strength * 2);
 	this->iq = (this->psyche * 1.5) + 5;
-	//this->speed = (this->dexterity * 1.5) + 2;
+	this->speed = (this->dexterity * 1.5) + 2;
 }
 
 std::string Character::getAsString() const
@@ -190,5 +208,6 @@ std::string Character::getAsString() const
 		std::to_string(this->ppMax) + ' ' +
 		std::to_string(this->offense) + ' ' +
 		std::to_string(this->defense) + ' ' +
-		std::to_string(this->iq);
+		std::to_string(this->iq) + ' ' +
+		std::to_string(this->speed);
 }
