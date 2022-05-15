@@ -19,9 +19,9 @@ public:
 	void initGame();
 	void mainMenu();
 	void createNewCharacter();
-	void levelUpCharacter();
 	void saveCharacters();
 	void loadCharacters();
+	void selectCharacter();
 	void Travel();
 
 	//Accessors
@@ -38,5 +38,9 @@ private:
 	int activeCharacter;
 	std::vector<Character> characters;
 	std::string fileName;
+
+	//Enemies
+	dArr<Enemy> enemies;
 };
+
 

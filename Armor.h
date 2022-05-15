@@ -16,6 +16,12 @@ public:
 	//Functions
 	std::string toString();
 
+	//Accessors
+	inline int getDefense() const { return this->defense; }
+
+	//Modifers
+
+
 private:
 	int defense;
 };

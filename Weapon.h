@@ -15,6 +15,13 @@ public:
 	//Functions
 	std::string toString();
 
+
+	//Accessors
+	inline int getOffense() const { return this->offense; }
+
+	//Modifers
+
+
 private:
 	int offense;
 };

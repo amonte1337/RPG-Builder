@@ -4,7 +4,7 @@
 int main()
 {
     //random time counter
-    srand(static_cast<unsigned>(time(0)));
+    srand((unsigned)time(NULL));
 
     /*
     int level = 5;
